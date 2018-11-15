@@ -101,7 +101,7 @@ scheduler-docker-local-scheduler-deploy() {
         declare CID="$1" PROC_TYPE="$2" CONTAINER_INDEX="$3"
         mkdir -p "${DOKKU_LIB_ROOT}/data/scheduler-docker-local/$APP"
         echo "${CID} ${PROC_TYPE}.${CONTAINER_INDEX}" >> "${DOKKU_LIB_ROOT}/data/scheduler-docker-local/$APP/failed-containers"
-        docker inspect "$CID" &> /dev/null && docker stop "$CID" > /dev/null && docker kill "$CID" &> /dev/null
+        docker inspect "$CID" &> /dev/null && docker stop "$CID" > /dev/null && docker kill "$CID" &> /dev/null || true
         trap - INT TERM EXIT
         kill -9 $$
       }
